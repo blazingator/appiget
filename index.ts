@@ -1,4 +1,4 @@
-import { getAppInfo } from './functions'
+import { getAppInfo, listApps } from './functions'
 
 const { argv } = process
 const [option, app] = argv.slice(2)
@@ -33,6 +33,9 @@ switch(option){
   case '--info':
     getAppInfo(app)
     break
+  case '-L':
+  case '--list':
+    listApps()
   default:
     break
 }
