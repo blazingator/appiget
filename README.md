@@ -1,0 +1,1 @@
+# AppiGet - Appimage cli manager
