@@ -1,18 +1,18 @@
 import api from '../services/ghapi'
+import singleArrayToObject from '../utils/singleArrayToObject'
+import writeAppInfo from './writeAppInfo'
 
-import appsinstalled from '../apps.json'
+import apps from '/home/vinicius/.config/appiget/apps.json'
 
 export default async function getAppInfo(app: string){
-  let appInfo = appsinstalled.filter((a: AppsInstalled) => a.repo === app)
-    .reduce((result: any,item: string,index: number) => {
-      result[index] = item
-      return result
-    })
+  let appInfo = apps.filter((a: AppList) => a.repo === app)
+    .reduce(singleArrayToObject)
   
   let releaseInfo = Array<ReleaseInfo>()
 
   try{
-    releaseInfo = await api.get(`repos/${appInfo.user}/${appInfo.repo}/releases`).then(res => res.data)
+    releaseInfo = await api.get(`repos/${appInfo.user}/${appInfo.repo}/releases`)
+      .then(res => res.data)
   }catch(err){
     console.log(err.message)
   }
@@ -27,14 +27,35 @@ export default async function getAppInfo(app: string){
       })
     }
   })
-
-  let latestRelease = releases[0]
+ 
+  let {tag_name, assets} = releases[0]
+ 
+  let regex =/.*((amd64)|x(86[\-,\_]?)?64)?(?<!x86)(?<!arm.*)\.appimage$/gi
+ 
+  let asset = assets.map(a => a.name)
+    .filter(n => n.match(regex))
+    .reduce(singleArrayToObject)
+  
+  let downloadURL = `https://github.com/${appInfo.user}/${appInfo.repo}/releases/download/${tag_name}/${asset}`
   
   console.log(`
- Name: ${app}
- latest version: ${latestRelease.tag_name}
- Installed version: ${appInfo.versionInstalled}
- Packed by: ${appInfo.user}
- Github repo: https://github.com/${appInfo.user}/${appInfo.repo}
-    `)
+ Name               : ${app}
+ latest version     : ${tag_name}
+ Installed version  : ${appInfo.versionInstalled}
+ Packed by          : ${appInfo.user}
+ URL                : https://github.com/${appInfo.user}/${appInfo.repo}
+ DownloadURL        : ${downloadURL}
+`)
+
+  let { user, repo, versionInstalled } = appInfo
+  let fetchedAppInfo = {
+    user,
+    repo,
+    latest: tag_name,
+    versionInstalled,
+    assetURL: downloadURL
+  }
+
+  writeAppInfo(fetchedAppInfo, `${process.env.HOME}/.config/appiget/apps.json`)
+
 }

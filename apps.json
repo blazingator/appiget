@@ -1,37 +1,44 @@
 [
   {
-    "user": "beekeeper-studio",
-    "repo": "beekeeper-studio",
-    "latest": "?",
-    "versionInstalled":"?",
-    "assetURL": "?"
-  },   
-  {
     "user": "th-ch",
     "repo": "youtube-music",
-    "latest": "?",
-    "versionInstalled":"?",
-    "assetURL": "?"
-  },   
+    "latest": "v1.5.0",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/th-ch/youtube-music/releases/download/v1.5.0/YouTube-Music-1.5.0.AppImage"
+  },
   {
-    "user": "IsmaelMartinez",
-    "repo": "teams-for-linux",
-    "latest": "?",
-    "versionInstalled":"?",
-    "assetURL": "?"
-  },   
+    "user": "beekeeper-studio",
+    "repo": "beekeeper-studio",
+    "latest": "v1.8.7",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v1.8.7/Beekeeper-Studio-1.8.7.AppImage"
+  },
   {
     "user": "Toinane",
     "repo": "colorpicker",
-    "latest": "?",
-    "versionInstalled":"?",
-    "assetURL": "?"
-  },   
+    "latest": "2.0.3",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/Toinane/colorpicker/releases/download/2.0.3/Colorpicker_2.0.3.AppImage"
+  },
   {
     "user": "tgambet",
     "repo": "musicalypse",
-    "latest": "?",
-    "versionInstalled":"?",
-    "assetURL": "?"   
+    "latest": "v1.0.0",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/tgambet/musicalypse/releases/download/v1.0.0/Musicalypse-1.0.0-x64.AppImage"
+  },
+  {
+    "user": "IsmaelMartinez",
+    "repo": "teams-for-linux",
+    "latest": "v1.0.5",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.0.5/teams-for-linux-1.0.5.AppImage"
+  },
+  {
+    "user": "jgraph",
+    "repo": "drawio-desktop",
+    "latest": "v13.7.9",
+    "versionInstalled": "?",
+    "assetURL": "https://github.com/jgraph/drawio-desktop/releases/download/v13.7.9/draw.io-x86_64-13.7.9.AppImage"
   }
 ]
