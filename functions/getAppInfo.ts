@@ -2,7 +2,7 @@ import api from '../services/ghapi'
 import singleArrayToObject from '../utils/singleArrayToObject'
 import writeAppInfo from './writeAppInfo'
 
-import apps from '/home/vinicius/.config/appiget/apps.json'
+import { apps, filePath } from '../utils/readAppsInfo'
 
 export default async function getAppInfo(app: string){
   let appInfo = apps.filter((a: AppList) => a.repo === app)
@@ -56,6 +56,6 @@ export default async function getAppInfo(app: string){
     assetURL: downloadURL
   }
 
-  writeAppInfo(fetchedAppInfo, `${process.env.HOME}/.config/appiget/apps.json`)
+  writeAppInfo(fetchedAppInfo, filePath)
 
 }

@@ -1,6 +1,5 @@
 // import api from '../services/ghapi'
-import apps from '/home/vinicius/.config/appiget/apps.json'
-
+import { apps } from '../utils/readAppsInfo'
 
 export default async function listApps(){
   apps.forEach((a: AppList) => {
