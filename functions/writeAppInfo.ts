@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 // write app info to json file
-export default function writeAppInfo(app: AppList, file: string){
+export default function writeAppInfo(apps: Array<AppList> | any, file: string){
   let fd = fs.openSync(file,'r+')
   let rawFileData = fs.readFileSync(fd)
 
@@ -11,16 +11,8 @@ export default function writeAppInfo(app: AppList, file: string){
   }
 
   try{
-    let currentFileData = JSON.parse(rawFileData.toString())
-    let newFileData = currentFileData.map((a: any) => {
-      if(a.user === app.user &&
-        a.repo === app.repo){
-        return app
-      }
-      return a
-    })
-    
-    fs.writeFileSync(file,JSON.stringify(newFileData,null,2))
+       
+    fs.writeFileSync(file,JSON.stringify(apps,null,2))
     console.log('apps.json updated succefully')
     
     fs.closeSync(fd)

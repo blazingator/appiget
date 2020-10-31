@@ -1,4 +1,4 @@
-import { getAppInfo, listApps } from './functions'
+import { getAppInfo, listApps, syncAppsInfo } from './functions'
 
 const { argv } = process
 const [option, app] = argv.slice(2)
@@ -9,15 +9,11 @@ function displayHelp(){
 
  -U, --update <app> Update an app
  -I, --info <app> Displays information about an app
+ -S, --sync Fetch apps release info and write to apps.json
  -h, --help <app> Display help`
   
   console.log(helpMessage)
 }
-
-
-// function installApp(app: string){
-  
-// }
 
 if(argv.length === 2) displayHelp()
 
@@ -36,6 +32,11 @@ switch(option){
   case '-L':
   case '--list':
     listApps()
+    break
+  case '-S':
+  case '--sync':
+    syncAppsInfo()
+    break
   default:
     break
 }

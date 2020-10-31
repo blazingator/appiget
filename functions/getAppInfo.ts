@@ -1,10 +1,9 @@
 import api from '../services/ghapi'
 import singleArrayToObject from '../utils/singleArrayToObject'
-import writeAppInfo from './writeAppInfo'
 
-import { apps, filePath } from '../utils/readAppsInfo'
+import { apps } from '../utils/readAppsInfo'
 
-export default async function getAppInfo(app: string){
+export default async function getAppInfo(app: string, sync: boolean = false){
   let appInfo = apps.filter((a: AppList) => a.repo === app)
     .reduce(singleArrayToObject)
   
@@ -38,6 +37,20 @@ export default async function getAppInfo(app: string){
   
   let downloadURL = `https://github.com/${appInfo.user}/${appInfo.repo}/releases/download/${tag_name}/${asset}`
   
+  let { user, repo, versionInstalled } = appInfo
+  
+  if(sync){
+    let fetchedAppInfo = {
+      user,
+      repo,
+      latest: tag_name,
+      versionInstalled,
+      assetURL: downloadURL
+    }
+
+    return fetchedAppInfo
+  }
+     
   console.log(`
  Name               : ${app}
  latest version     : ${tag_name}
@@ -46,16 +59,5 @@ export default async function getAppInfo(app: string){
  URL                : https://github.com/${appInfo.user}/${appInfo.repo}
  DownloadURL        : ${downloadURL}
 `)
-
-  let { user, repo, versionInstalled } = appInfo
-  let fetchedAppInfo = {
-    user,
-    repo,
-    latest: tag_name,
-    versionInstalled,
-    assetURL: downloadURL
-  }
-
-  writeAppInfo(fetchedAppInfo, filePath)
 
 }
