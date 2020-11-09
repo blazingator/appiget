@@ -18,7 +18,5 @@ export default function syncAppsInfo(){
         return
       }
       writeAppInfo(data, filePath)
-    })
- 
-  //writeAppInfo(data, filePath)
+    }) 
 }
