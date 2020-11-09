@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --quiet --ignore node_modules index.ts",
+    "dev": "ts-node-dev --transpile-only --quiet --ignore node_modules src/index.ts",
     "build": "sucrase-node "
   },
   "keywords": [],
