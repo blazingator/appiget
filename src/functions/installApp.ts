@@ -6,6 +6,7 @@ import { apps, filePath } from '../utils/readAppsInfo'
 import singleArrayToObject from '../utils/singleArrayToObject'
 import getAppInfo from './getAppInfo'
 import writeAppInfo from './writeAppInfo'
+import changeFilePermissions from '../utils/changeFileMode'
 
 const INSTALL_DIR = `${process.env.HOME}/Appimage/`
 //const SYMLINK = true
@@ -57,11 +58,4 @@ export default async function installApp(app: string){
  
 }
 
-function changeFilePermissions(appFilePath: string){
-  try{
-  	fs.chmodSync(appFilePath, 0o711)
-  	console.log("Changed file permissions sucessfully")
-  }catch(err){
-  	throw err
-  }
-}
+
