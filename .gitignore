@@ -1,1 +1,4 @@
 node_modules/*
+dist/*
+vim-node-config.json
+*.json_backup

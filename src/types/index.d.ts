@@ -1,6 +1,6 @@
 declare module "*.json"
 
-declare interface AppsInstalled {
+declare interface AppList {
   user: string
   repo: string
   versionInstalled: string
