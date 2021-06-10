@@ -1,6 +1,7 @@
 import fs, { promises as fsPromises } from 'fs'
 
 export default function changeFilePermissions(appFilePath: string){
+  // TODO fix the exec permission change
   fsPromises.access(appFilePath, fs.constants.X_OK)
     .then(() => {
       try{

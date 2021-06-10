@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs, { promises as fsPromises } from 'fs'
 import axios from 'axios'
 import ProgressBar from 'progress'
 
@@ -43,8 +43,8 @@ export default async function installApp(app: string){
   data.pipe(file)
 
   data.on('end', () => {
-  	changeFilePermissions(INSTALL_DIR+file_name)
     file.close()
+    changeFilePermissions(INSTALL_DIR+file_name)
     
     appInfo = apps.map((a: AppList) => {
       if(a.repo === appInfo.repo){
@@ -54,8 +54,24 @@ export default async function installApp(app: string){
     })
     
     writeAppInfo(appInfo, filePath)
+    makeSymlink(app)
   })
- 
+  
 }
 
+async function makeSymlink(app: string){
+  const linkPath = `${process.env.HOME}/.local/bin/`
 
+  try{
+    const stats = await fsPromises.lstat(linkPath+app)
+    if(stats) return
+  }catch(err){
+    fsPromises.symlink(
+      `${INSTALL_DIR+app}.appimage`,linkPath+app
+    )
+      .then(() => console.log('Symbolic link to '+linkPath))
+      // .catch(err =>
+      //     console.log('Symlink already exists'))
+    //console.error(err)
+  }
+}

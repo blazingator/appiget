@@ -17,7 +17,8 @@ AppiGet is a cli tool to manage programs in AppImage format on linux
 ### To-do
 - [x] Sync app info by Github API
 - [x] Download AppImage file with axios
-- [x] Manage file permissions with fs module
+- [ ] Manage file permissions with fs module
+- [x] Function to create symbolic link to ~/.local/bin/ folder
 - [ ] Manage outdated files while downloading updated ones
 - [ ] Better error handling
 - [ ] Custom configs
